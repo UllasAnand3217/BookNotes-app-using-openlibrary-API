@@ -6,15 +6,19 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+dotenv.config();
+const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "../views"));
 app.use(express.static(path.join(__dirname, "../public")));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 
-dotenv.config();
 const db = new pg.Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -24,12 +28,8 @@ const db = new pg.Client({
   
   await db.connect();
 
-const app = express();
-const port = 3000;
-app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+// const port = 3000;
 
 app.get("/", async (req, res) => {
     const query = req.query.q || "harry potter";
