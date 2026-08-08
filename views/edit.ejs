@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                Book Notes
+            </a>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="mb-4">Edit Note</h2>
+                        <form action="/note/edit/<%= note.id %>" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Rating</label>
+                                <select class="form-select" name="rating" required>
+                                    <option value="1" <%= note.rating==1 ? "selected" : "" %>>⭐</option>
+                                    <option value="2" <%= note.rating==2 ? "selected" : "" %>>⭐⭐</option>
+                                    <option value="3" <%= note.rating==3 ? "selected" : "" %>>⭐⭐⭐</option>
+                                    <option value="4" <%= note.rating==4 ? "selected" : "" %>>⭐⭐⭐⭐</option>
+                                    <option value="5" <%= note.rating==5 ? "selected" : "" %>>⭐⭐⭐⭐⭐</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Note</label>
+
+                                <textarea class="form-control" rows="6" name="note" required><%= note.note %></textarea>
+                            </div>
+
+                            <button class="btn btn-success">
+                                Update Note
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
